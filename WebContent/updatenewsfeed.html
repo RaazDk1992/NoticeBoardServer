@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="bootstrap-4/css/bootstrap.css">
+<link rel="stylesheet" href="bootstrap-4/css/bootstrap.min.css">
+<script src="scripts/jquery.js"></script>
+<script src="bootstrap-4/js/bootstrap.js"></script>
+<script src="scripts/previewscript.js"></script>
+
+<script src="bootstrap-4/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+		<div class="modal fade" id="updateNewsFeed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update NewsFeed</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form id="newsfeed_update" class="form" action="./Base" method="POST" accept-charset="UTF-8">
+       <input type="hidden" name="operation" id="operation" value="update_newsfeed"/>
+        <input type="hidden" name="SN" id="SN" value=""/>
+       
+     <div class="form-group w-100">
+     <label for="staff_name">सूचना शिर्षक</label>
+     <input class="form-control" type="text" name="notice_title_new" id="notice_title_new" placeholder="Notice title"/>
+     </div>
+    
+     <div class="form-group w-100">
+     <label for="staff_contact">विवरण</label>
+     <TextArea class="form-control"  name="notice_details_new" id="notice_details_new"></TextArea>
+    
+     </div>
+     </form>
+       <div id="newsfeed_update_response"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="btn_update" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script >
+$(document).ready(function(){
+	//alert("Done!!");
+	
+	$("#updateNewsFeed").on('shown.bs.modal',function(e){
+		
+		var data =$(e.relatedTarget).data('ref');
+		$("#SN").val(data.SN);
+		$("#notice_details_new").val(data.notice_body);
+		$("#notice_title_new").val(data.notice_title);
+	});
+	$("#newsfeed_update").submit(function(e){
+		
+	});
+});
+</script>
+</html>

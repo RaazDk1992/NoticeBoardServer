@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="bootstrap-4/css/bootstrap.css">
+<link rel="stylesheet" href="bootstrap-4/css/bootstrap.min.css">
+<script src="scripts/jquery.js"></script>
+<script src="bootstrap-4/js/bootstrap.js"></script>
+<script src="scripts/previewscript.js"></script>
+
+<script src="bootstrap-4/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+		<div class="modal fade" id="updateServices" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update NewsFeed</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form class="form" action="./Base" method="POST">
+       <input type="hidden" name="operation" id="operation" value="update_services" accept-charset="UTF-8"/>
+     <div class="form-group w-75">
+     <label for="staff_name">सेवा</label>
+     <input class="form-control" type="text" name="service_name" id="service_name_new" placeholder="Notice title"/>
+     </div>
+    
+     <div class="form-group w-75">
+     <label for="staff_contact">आवश्यक कागजात</label>
+     <TextArea class="form-control"  name="required_documents" id="required_docs_new"></TextArea>
+    
+     </div>
+     <div class="form-group w-75">
+     <label for="staff_contact">प्रकिया</label>
+     <TextArea class="form-control"  name="process" id="process_new"></TextArea>
+    
+     </div>
+      <div class="form-group w-75">
+     <label for="staff_name">सम्बन्धित कर्मचारी</label>
+     <input class="form-control" type="text" name="res_employee" id="res_employee_new" placeholder="सम्बन्धप"/>
+     </div>
+      <div class="form-group w-75">
+     <label for="amt">सेवा शुल्क</label>
+     <input class="form-control" type="text" name="amount" id="amount_new" placeholder="सेवा शुल्क"/>
+     </div>
+     
+      </form>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+$(document).ready(function(){
+	
+	
+	$("#updateServices").on('shown.bs.modal',function(e){
+		
+		var data =$(e.relatedTarget).data('ref');
+		console.log(data);
+		$("#service_name_new").val(data.service_title);
+		$("#required_docs_new").val(data.required_document);
+		$("#res_employee_new").val(data.res_employee);
+		$("#process_new").val(data.process);
+		$("#amount_new").val(data.fee);
+		
+	});
+});
+</script>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="bootstrap-4/css/bootstrap.css">
+<link rel="stylesheet" href="bootstrap-4/css/bootstrap.min.css">
+<script src="scripts/jquery.js"></script>
+<script src="bootstrap-4/js/bootstrap.js"></script>
+<script src="scripts/previewscript.js"></script>
+
+<script src="bootstrap-4/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+		<div class="modal fade" id="updateCandidate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Candidate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form class="form" id="candidate_update_form" action="./Base" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+     <input type="hidden" name="operation" id="xx" value="update_candidate"/>
+     <div class="form-group ">
+     <label for="elected_candidate_name">जनप्रतिनिधिको नाम</label>
+     <input class="form-control" type="text" name="elected_candidate_name" id="elected_candidate_name_new" placeholder="Candidate name here."/>
+     </div>
+     <div class="form-group ">
+     <label for="elected_candidate_designation">पद</label>
+     <input class="form-control" type="text" name="elected_candidate_designation" id="elected_candidate_designation_new" placeholder="Candidate designation here."/>
+     
+     </div>
+     <div class="form-group ">
+     <label for="elected_candidate_name">सम्पर्क</label>
+     <input class="form-control" type="text" name="elected_candidate_contact" id="elected_candidate_contact_new" placeholder="Candidate Contact here."/>
+    
+     </div>
+     <div class="form-group">
+     					<label>जन प्रतिनिधिको फोटो</label>
+     					<input type="file" name="elected_candidate_photo" accept="image/*"  onchange="previewFile(this, 'preview_elected')" />
+						 <br/>
+						<img id="preview_elected_new" style="width:100px; height:100px; margin-top:10px;"  src="" alt="-----------"/>
+     					
+     					</div>
+     					 <div class="form-group w-75">
+     <label for="staff_contact">weight(* In ascending order)</label>
+     <input class="form-control" type="text" name="candidate_weight" id="candidate_weight_new" placeholder="Enter rank here."/>
+    
+     </div>
+   
+     </form>
+       	<div id="candidate_update_status"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" id="btn_update_candidate" type="button" class="btn btn-primary" value="Apply Changes" />
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+$(document).ready(function(){
+	
+	
+	$("#updateCandidate").on('shown.bs.modal',function(e){
+		
+		var data =$("#edit_candidate").data("ref");
+		//console.log(data);
+		$("#elected_candidate_name_new").val(data.candidate_name);
+		$("#elected_candidate_contact_new").val(data.candidate_contact);
+		$("#elected_candidate_designation_new").val(data.candidate_post);
+		$("#candidate_weight_new").val(data.weight);
+		
+		
+	});
+	$("#candidate_update_form").submit(function(e){
+		 e.preventDefault();
+		 var form = $('#candidate_update_form')[0];
+		 var data = new FormData(form);
+		  $.ajax({
+			    enctype: 'multipart/form-data',
+			    processData: false,
+	            contentType: false,
+			    type: form.attr('method'),
+	            url: form.attr('action'),
+	            data: form.serialize(),
+	            success: function (data) {
+	                console.log('Submission was successful.');
+	                console.log(data);
+	            },
+	            error: function (data) {
+	                console.log('An error occurred.');
+	                console.log(data);
+	            },
+	        });
+	});
+});
+</script>
+</html>
